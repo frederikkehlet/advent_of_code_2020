@@ -1,4 +1,3 @@
-# convert txt list to int list
 input = open('input.txt', 'r')
 lines = input.readlines()
 
