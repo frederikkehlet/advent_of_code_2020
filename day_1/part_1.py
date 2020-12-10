@@ -5,15 +5,11 @@ numbers = input.readlines()
 for i in range(len(numbers)): 
     numbers[i] = int(numbers[i].strip())
 
-# create variable "comparer"
-comparer = 0
-
 def solve():
-    for num in numbers:
-        comparer = num
-        for rest in numbers:
-            if rest + comparer == 2020:
-                output = rest * comparer
+    for first in numbers:        
+        for second in numbers:
+            if first + second == 2020:
+                output = first * second
                 return output
 
 output = solve()
