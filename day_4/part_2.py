@@ -21,7 +21,6 @@ for ps in passports_stripped:
     passport_dict.append(dict(x.split(':') for x in ps.split(' ')))
 
 
-#print(passport_dict[0].values())
 def solve():
 
     n_valid_passports = 0
