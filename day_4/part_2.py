@@ -1,4 +1,5 @@
 import re
+from re import search
 import numpy as np
 
 passports = []
@@ -14,35 +15,53 @@ for passport in passports:
     passport = passport.replace('\n', ' ')
     passports_stripped.append(passport)
 
-regexs = [
-    "byr:19[2-9][0-9]|200[0-2]",
-    "iyr:201[0-9]|2020",
-    "eyr:202[0-9]|2030",
-    "hgt:((1[5-8][0-9]|19[0-3])cm)|hgt:(59|6[0-9]|7[0-6])in",
-    "hcl:#[0-9a-f]{6}",
-    "ecl:(amb|blu|brn|gry|grn|hzl|oth)",
-    "pid:[0-9]{9}"
-]
+passport_dict = []
 
-#print(passports_stripped)
+for ps in passports_stripped:
+    passport_dict.append(dict(x.split(':') for x in ps.split(' ')))
 
+
+#print(passport_dict[0].values())
 def solve():
+
     n_valid_passports = 0
-    for passport in passports_stripped:
+        
+    for ps in passport_dict:
+
         n_valid_fields = 0
-        print(passport)
-        for regex in regexs:
-            match = re.search(regex, passport)
-            print(match)
-            if (match != None):
+
+        if 'byr' in ps:
+            if 1920 <= int(ps['byr']) <= 2002: n_valid_fields += 1
+        if 'iyr' in ps:
+            if 2010 <= int(ps['iyr']) <= 2020: n_valid_fields += 1
+        if 'eyr' in ps:
+            if 2020 <= int(ps['eyr']) <= 2030: n_valid_fields += 1
+        if 'hgt' in ps:
+            if re.search("[0-9]{3}cm", ps['hgt']) != None:
+                if 150 <= int(ps['hgt'][:-2]) <= 193: n_valid_fields += 1
+            elif re.search("[0-9]{2}in", ps['hgt']) != None:
+                if 59 <= int(ps['hgt'][:-2]) <= 76: n_valid_fields += 1
+        if 'hcl' in ps:
+            if re.search("#([0-9]|[a-f]){6}", ps['hcl']) != None:
+                 if len(ps['hcl']) == 7: n_valid_fields += 1
+        if 'ecl' in ps:
+            if (ps['ecl'] == 'amb' or ps['ecl'] == 'blu' or ps['ecl'] == 'brn' or ps['ecl'] == 'gry' or ps['ecl'] == 'grn' or ps['ecl'] == 'hzl' or ps['ecl'] == 'oth'):
                 n_valid_fields += 1
+        if 'pid' in ps:
+            if re.search("[0-9]{9}", ps['pid']) != None:
+                if len(ps['pid']) == 9: n_valid_fields += 1
 
-        print(n_valid_fields)
-        if (n_valid_fields == 7):
-            n_valid_passports += 1
     
+        if n_valid_fields == 7:
+            n_valid_passports += 1
 
+    
     return n_valid_passports
-            
+
+
 output = solve()
 print(output)
+
+
+    
+
