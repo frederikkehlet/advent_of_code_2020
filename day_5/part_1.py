@@ -1,4 +1,3 @@
-import math
 lines  = []
 
 with open('input.txt') as f:
