@@ -1,8 +1,9 @@
-lines  = []
+lines = []
 
 with open('input.txt') as f:
     lines = f.readlines()
     lines = [l.replace('\n', '') for l in lines]
+
 
 def solve():
     ids = []
@@ -26,11 +27,13 @@ def get_row(row_input):
 
     return 127 - decimal       
 
+
 def get_col(col_input):
     binary = [0 if c == 'R' else 1 for c in col_input]
     decimal = int("".join(str(i) for i in binary),2)
 
     return 7 - decimal
+
 
 output = solve()
 print(output)
