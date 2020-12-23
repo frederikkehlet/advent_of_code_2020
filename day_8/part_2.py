@@ -54,7 +54,9 @@ outputs = []
 for variation in variations:
      outputs.append(solve(variation))
 
-print(sorted(outputs, key = lambda x: x[1]))
+#sorting the tuple by the second element, the largest being the variation of instructions where all instructions were executed
+print(sorted(outputs, key = lambda x: x[1])) 
+
 
 
 
