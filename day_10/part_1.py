@@ -1,7 +1,7 @@
 with open('input.txt', 'r') as f:
-     adapters = [int(line.strip('\n')) for line in f.readlines()]
+     adapters = sorted([int(line.strip('\n')) for line in f.readlines()])
 
-device_rating = sorted(adapters)[-1] + 3
+device_rating = adapters[-1] + 3
 effective_rating = 0
 differences_1 = []
 differences_3 = []
@@ -15,7 +15,7 @@ while effective_rating < device_rating:
 
      if len(possible_adapters) == 0: break
 
-     new_effective_rating = sorted(possible_adapters)[0] # get lowest possible difference
+     new_effective_rating = possible_adapters[0]
 
      difference = new_effective_rating - effective_rating
      differences_1.append(difference) if difference == 1 else differences_3.append(difference)    
