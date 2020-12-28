@@ -28,17 +28,12 @@ while seats_have_changed:
                     seats.append(rows[row][seat])
           new_rows.append(seats)
    
-     if rows == new_rows:
-          seats_have_changed = False
-     else:
-          rows = new_rows
+     if rows == new_rows: seats_have_changed = False
+     else: rows = new_rows
 
 n_occupied_seats_final = 0
-for row in rows:
-     n = 0
-     n = [r.count('#') for r in row]
-     n_occupied_seats_final += sum(n)
-
+for row in rows: 
+     n_occupied_seats_final += sum([r.count('#') for r in row])
 print(n_occupied_seats_final)
 
 
