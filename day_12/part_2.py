@@ -20,10 +20,10 @@ for coord in coordinates:
           waypoint[3] = (waypoint[3] + int(value))
      elif direction == 'L':
           n = int(value) / 90
-          waypoint = np.roll(waypoint,int(-n))
+          waypoint = np.roll(waypoint,int(-n)) # "rotates" the waypoint n times counter clockwise
      elif direction == 'R':
           n = int(value) / 90
-          waypoint = np.roll(waypoint, int(n))
+          waypoint = np.roll(waypoint, int(n)) # "rotates" the waypoint n times clockwise
      elif direction == 'F':
           for i in range(4):
                coords[i] += int(value) * waypoint[i]
