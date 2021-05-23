@@ -21,8 +21,8 @@ def solve():
         if not spokenPreviously: numbers.insert(0,0)
         else: numbers.insert(0,latestTurn + 1)
         turn += 1
-        
-    return numbers[0]
+
+    return numbers
 
 answer = solve()
 print(answer)
