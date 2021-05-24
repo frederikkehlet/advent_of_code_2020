@@ -2,27 +2,28 @@ input = open('input.txt', 'r')
 lines = input.readlines()
 
 def solve():
-    numbers = [int(num) for num in list(reversed(lines[0].split(',')))]
-    turn = len(numbers) + 1
-    while turn <= 2020:
-        lastSpokenNumber = numbers[0]
-        previousNumbers = numbers[1:]
-        
-        i = 0
-        latestTurn = 0
-        spokenPreviously = False
-        while i < len(previousNumbers):        
-            if lastSpokenNumber == int(previousNumbers[i]):
-                spokenPreviously = True
-                latestTurn = i
-                break
-            i += 1
-        
-        if not spokenPreviously: numbers.insert(0,0)
-        else: numbers.insert(0,latestTurn + 1)
-        turn += 1
+    numbers = {}
+    startingNumbers = [int(num) for num in list(lines[0].split(','))]
 
-    return numbers
+    for i in range(len(startingNumbers)):
+        numbers[startingNumbers[i]] = i+1
+
+    n = 0
+    t = 7
+
+    while t <= 2020:
+        if n in numbers:
+            diff = t - numbers[n]
+            numbers[n] = t
+            n = diff
+            t += 1
+        else:
+            numbers[n] = t
+            n = 0
+            t += 1
+
+    sortedNumbers = dict(sorted(numbers.items(), key = lambda x:x[1]))
+    return list(sortedNumbers.items())[-1][0]
 
 answer = solve()
 print(answer)
